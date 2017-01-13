@@ -526,7 +526,7 @@ configure: failed program was:
 configure:13250: result: no
 configure:13153: checking whether pthreads work without any flags
 configure:13241: gcc -o conftest -g -O2    conftest.c   >&5
-/tmp/ccWKieTM.o: In function `main':
+/tmp/ccjGK0Bq.o: In function `main':
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:27: undefined reference to `pthread_join'
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:28: undefined reference to `__pthread_register_cancel'
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:29: undefined reference to `pthread_create'
@@ -1070,7 +1070,7 @@ configure:14737: gcc -o conftest -g -O2 -fopenmp   conftest.c  >&5
 conftest.c:66:6: warning: conflicting types for built-in function 'floor'
  char floor ();
       ^
-/tmp/cc8uNb7M.o: In function `main':
+/tmp/cciMNuw9.o: In function `main':
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:77: undefined reference to `floor'
 collect2: error: ld returned 1 exit status
 configure:14737: $? = 1
@@ -1168,7 +1168,7 @@ configure:14737: gcc -o conftest -g -O2 -fopenmp   conftest.c  >&5
 conftest.c:67:6: warning: conflicting types for built-in function 'pow'
  char pow ();
       ^
-/tmp/ccwPdB7c.o: In function `main':
+/tmp/cc80Zm4p.o: In function `main':
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:78: undefined reference to `pow'
 collect2: error: ld returned 1 exit status
 configure:14737: $? = 1
@@ -1264,7 +1264,7 @@ configure:14737: gcc -o conftest -g -O2 -fopenmp   conftest.c  >&5
 conftest.c:68:6: warning: conflicting types for built-in function 'sqrt'
  char sqrt ();
       ^
-/tmp/ccV8ZEJu.o: In function `main':
+/tmp/ccUeZFpJ.o: In function `main':
 /xchip/gistic/Jeremiah/GIT/apophenia-clone/conftest.c:79: undefined reference to `sqrt'
 collect2: error: ld returned 1 exit status
 configure:14737: $? = 1

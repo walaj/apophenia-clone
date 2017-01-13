@@ -19,7 +19,7 @@ before_install:
 - sudo apt-get install libgsl0-dev libsqlite3-dev
 
 script: 
-- ./configure && make CXX=$COMPILER CFLAGS=-I$GSLHOME LIBS="-lgsl -lgslcblas" && make install
+- ./configure --prefix=`pwd` && make CXX=$COMPILER LIBS="-lgsl -lgslcblas" && make install
 
 after_failure: "cat /home/travis/builds/walaj/apophenia-clone/Makefile"
 
