@@ -1,0 +1,15 @@
+prefix=/xchip/gistic/Jeremiah/GIT/apophenia-clone
+exec_prefix=${prefix}
+bindir=${exec_prefix}/bin
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Apophenia
+Description: The Apophenia library
+URL: http://apophenia.info/
+Requires: gsl
+Requires.private: sqlite3
+Version: 1.0
+Cflags: 
+Libs: -L${libdir} -lapophenia
+Libs.private: 

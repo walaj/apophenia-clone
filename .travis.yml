@@ -1,0 +1,28 @@
+language: cpp
+
+matrix:
+  include:
+    - compiler: gcc
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-4.9
+      env: COMPILER=g++-4.9
+
+before_install: 
+- git submodule update --init --recursive
+- sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+- sudo apt-get update
+- sudo apt-get install python-yaml libyaml-dev build-essential libssh2-1-dev libarchive-dev
+- sudo apt-get install libgsl0-dev libsqlite3-dev
+
+script: 
+- ./configure && make CXX=$COMPILER CFLAGS=-I$GSLHOME LIBS="-lgsl -lgslcblas" && make install
+
+after_failure: "cat /home/travis/builds/walaj/apophenia-clone/Makefile"
+
+branches: 
+  only: 
+  - master

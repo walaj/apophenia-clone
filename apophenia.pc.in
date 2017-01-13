@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: Apophenia
+Description: The Apophenia library
+URL: http://apophenia.info/
+Requires: gsl
+Requires.private: sqlite3
+Version: @VERSION@
+Cflags: @MYSQL_CFLAGS@
+Libs: -L${libdir} -lapophenia
+Libs.private: @MYSQL_LDFLAGS@
