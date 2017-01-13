@@ -25,7 +25,7 @@ apop_opts_type apop_opts	=
 #include "apop_db_sqlite.c" // callback_t is defined here, btw.
 
 
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO // never use mysql
 //Let mysql have these.
 #undef VERSION
 #undef PACKAGE
@@ -86,12 +86,12 @@ don't need to bother).
 int apop_db_open(char const *filename){
     if (!apop_opts.db_engine) get_db_type();
     if (!db) //check the environment.
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
        if(!mysql_db)  
 #endif
 
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         return apop_mysql_db_open(filename);
 #else
         {Apop_stopif(1, return -1, 0, "Apophenia was compiled without mysql support.");}
@@ -142,7 +142,7 @@ apop_varad_head(int, apop_table_exists){
 #endif
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         return apop_mysql_table_exists(name, remove);
 #else
         Apop_stopif(1, return -1, 0, "Apophenia was compiled without mysql support.");
@@ -188,7 +188,7 @@ apop_varad_head(int, apop_db_close){
  int apop_db_close_base(char vacuum){
 #endif
     if (apop_opts.db_engine == 'm') //assume this is set by now...
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         {apop_mysql_db_close(0);
         return 0;}
 #else
@@ -221,7 +221,7 @@ int apop_query(const char *fmt, ...){
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         {Apop_stopif(!mysql_db, return 1, 0, "No mySQL database is open.");
         return apop_mysql_query(query);}
 #else
@@ -268,7 +268,7 @@ apop_data * apop_query_to_text(const char * fmt, ...){
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm'){
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         out = apop_mysql_query_core(query, process_result_set_chars);
 #else
         Apop_stopif(1, apop_return_data_error('d'), 0, "Apophenia was compiled without mysql support.");
@@ -336,7 +336,7 @@ apop_data * apop_query_to_data(const char * fmt, ...){
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         return apop_mysql_query_core(query, process_result_set_data);
 #else
         Apop_stopif(1, apop_return_data_error('d'), 0, "Apophenia was compiled without mysql support.");
@@ -380,7 +380,7 @@ gsl_vector * apop_query_to_vector(const char * fmt, ...){
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         return apop_mysql_query_core(query, process_result_set_vector);
 #else
         Apop_stopif(1, return NULL, 0, "Apophenia was compiled without mysql support.");
@@ -423,7 +423,7 @@ double apop_query_to_float(const char * fmt, ...){
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm'){
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         out = apop_mysql_query_to_float(query);
 #else
         Apop_stopif(1, return NAN, 0, "Apophenia was compiled without mysql support.");
@@ -469,7 +469,7 @@ apop_data * apop_query_to_mixed_data(const char *typelist, const char * fmt, ...
     Fillin(query, fmt)
     if (!apop_opts.db_engine) get_db_type();
     if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         {apop_data* out = apop_mysql_mixed_query(typelist, query);
         free(query);
         return out;}
@@ -567,7 +567,7 @@ int apop_data_to_db(const apop_data *set, const char *tabname, const char output
     if (apop_table_exists(tabname))
         Asprintf(&q, " ");
     else if (apop_opts.db_engine == 'm')
-#ifdef HAVE_MYSQL
+#ifdef HAVE_MYSQL_NO
         if (((output_append =='a' || output_append =='A') && apop_table_exists(tabname)))
             Asprintf(&q, " ");
         else {
